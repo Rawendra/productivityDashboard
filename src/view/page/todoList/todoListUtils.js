@@ -5,6 +5,7 @@ import {
   getDocs,
   deleteDoc,
   doc,
+  updateDoc,
 } from "firebase/firestore";
 import { TODOLIST } from "../../../db/collections";
 import { TYPES } from "../../../context/ContextStore";
@@ -26,8 +27,19 @@ export const reducer = (state, action) => {
 };
 
 export const submit = (newTask, dispatch) => {
-  addDoc(collectionRefToDoList, newTask);
-  udpateToDoListFromDatabase(dispatch);
+  console.log("newTask.id", newTask.id);
+  if (newTask.id) {
+    updateDoc(doc(database, TODOLIST, newTask.id), newTask)
+      .then(() => {
+        udpateToDoListFromDatabase(dispatch);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    addDoc(collectionRefToDoList, newTask);
+    udpateToDoListFromDatabase(dispatch);
+  }
 };
 
 export const udpateToDoListFromDatabase = (dispatch) => {
@@ -42,6 +54,32 @@ export const udpateToDoListFromDatabase = (dispatch) => {
 
 export const handleDelete = (deleteId, dispatch) => {
   deleteDoc(doc(database, TODOLIST, deleteId)).then(() => {
+    udpateToDoListFromDatabase(dispatch);
+  });
+};
+
+export const _handleDrawer = (isOpen, dispatch) => {
+  dispatch({
+    type: TYPES.UPDATE_NEW_TASK_META,
+    newTaskMetaData: { isOpen: isOpen },
+  });
+};
+
+export const submitBatch = (tasks, dispatch) => {
+  const promiseArray = tasks.reduce((_promiseArray, currentTask) => {
+    const promise = new Promise((res) => {
+      updateDoc(doc(database, TODOLIST, currentTask.id), currentTask).then(
+        () => {
+          res(true);
+        }
+      );
+    });
+    _promiseArray.push(promise);
+    return _promiseArray;
+  }, []);
+
+  Promise.all(promiseArray).then(() => {
+    console.log(promiseArray.length, "promise all");
     udpateToDoListFromDatabase(dispatch);
   });
 };

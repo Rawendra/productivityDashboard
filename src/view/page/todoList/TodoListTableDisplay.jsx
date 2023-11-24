@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useUpdateStore, useStore, TYPES } from "../../../context/ContextStore";
 import {
   Table,
@@ -10,7 +9,6 @@ import {
   TableContainer,
   Button,
   Tooltip,
-
 } from "@chakra-ui/react";
 import {
   DeleteIcon,
@@ -20,7 +18,7 @@ import {
   InfoOutlineIcon,
 } from "@chakra-ui/icons";
 
-import { handleDelete } from "./todoListUtils";
+import { handleDelete, _handleDrawer } from "./todoListUtils";
 function TodoListTableDisplay() {
   const store = useStore();
 
@@ -28,7 +26,6 @@ function TodoListTableDisplay() {
   const {
     store: { todoList },
   } = store;
-
 
   const displayList = todoList.sort((e1, e2) => e1.priority - e2.priority);
 
@@ -40,15 +37,21 @@ function TodoListTableDisplay() {
       newList[key - 1].priority = task.priority;
       task.priority = tempPriority;
       task.updated = true;
+      newList[key - 1].updated = true;
     } else {
       const tempPriority = newList[key + 1].priority;
       newList[key + 1].priority = task.priority;
       task.priority = tempPriority;
       task.updated = true;
+      newList[key + 1].updated = true;
     }
     dispatch({ type: TYPES.UPDATE_TODO_LIST, todoList: newList });
   };
 
+  const handleUpdate = (task) => {
+    _handleDrawer(true, dispatch);
+    dispatch({ type: TYPES.SET_NEWTASK, newTask: task });
+  };
   return (
     <>
       {!!displayList?.length && (
@@ -105,7 +108,11 @@ function TodoListTableDisplay() {
                     </Td>
                     <Td>
                       {" "}
-                      <Button colorScheme="blue" variant="outline">
+                      <Button
+                        onClick={() => handleUpdate(task)}
+                        colorScheme="blue"
+                        variant="outline"
+                      >
                         <LinkIcon />
                       </Button>
                     </Td>
@@ -126,7 +133,6 @@ function TodoListTableDisplay() {
           </Table>
         </TableContainer>
       )}
-
     </>
   );
 }
