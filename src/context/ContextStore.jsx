@@ -9,13 +9,16 @@ const initialState = {
   todoList: [],
   device: {},
   status: {},
+  newTaskMetaData: {isOpen:false},
   user: { name: "Rawendra", auth: "isAuthenticated" },
   version: 0,
 };
 const reducer = (state, action) => {
   switch (action.type) {
-    case "UPDATE_DB_METADATA":
+    case TYPES.UPDATE_DB_METADATA:
       return { ...state, dbMetaData: action.dbMetaData };
+    case TYPES.UPDATE_NEW_TASK_META:
+      return { ...state, ...{ newTaskMetaData: action.newTaskMetaData }};
     case "udpate":
       return { ...state, data: action.data };
 
