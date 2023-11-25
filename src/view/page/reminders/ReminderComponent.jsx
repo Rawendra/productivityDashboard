@@ -1,9 +1,11 @@
-
-
+import Calender from "../../../components/calender/Calender";
 function ReminderComponent() {
   return (
-    <div>ReminderComponent</div>
-  )
+    <div>
+      ReminderComponent
+      <Calender />
+    </div>
+  );
 }
 
-export default ReminderComponent
+export default ReminderComponent;
