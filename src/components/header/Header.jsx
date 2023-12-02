@@ -1,6 +1,6 @@
 import HeaderLink from "./HeaderLink";
 import { appConfig } from "../../AppConfig";
-
+import SideHeader from './SideHeader'
 import "./Header.css";
 function Header() {
   const { pages } = appConfig;
@@ -16,17 +16,8 @@ function Header() {
             />
           );
         })}
-        <div className="personalised-dashboard-parent-header-right-bar">
-          <div className="personalised-dashboard-parent-header-right-bar-item">
-            PROFILE
-          </div>
-          <div className="personalised-dashboard-parent-header-right-bar-item">
-            ABOUT US
-          </div>
-          <div className="personalised-dashboard-parent-header-right-bar-item">
-            LOG OFF
-          </div>
-        </div>
+        <SideHeader />
+       
       </div>
     </>
   );
