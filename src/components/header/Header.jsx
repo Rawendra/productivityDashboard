@@ -1,54 +1,34 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
-import { ROUTES } from "../../constants/routes";
-function Header() {
-  return (
-    <Tabs>
-      <TabList>
-        <Tab>
-          <NavLink
-            to={ROUTES.REMINDERS_ROUTE}
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "active" : "pending"
-            }
-          >
-            <div className="nav-item-header">REMINDERS_ROUTE</div>
-          </NavLink>
-        </Tab>
-        <Tab>
-          <NavLink
-            to={ROUTES.TODOLIST_ROUTE}
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "active" : "pending"
-            }
-          >
-            <div className="nav-item-header">TODOLIST_ROUTE</div>
-          </NavLink>
-        </Tab>
-        <Tab>
-          <NavLink
-            to={ROUTES.HABIT_TRACKER_ROUTES}
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "active" : "pending"
-            }
-          >
-            <div className="nav-item-header">HABIT_TRACKER_ROUTES</div>
-          </NavLink>
-        </Tab>
-      </TabList>
+import HeaderLink from "./HeaderLink";
+import { appConfig } from "../../AppConfig";
 
-      <TabPanels>
-        <TabPanel>
-          <p>one!</p>
-        </TabPanel>
-        <TabPanel>
-          <p>two!</p>
-        </TabPanel>
-        <TabPanel>
-          <p>three!</p>
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
+import "./Header.css";
+function Header() {
+  const { pages } = appConfig;
+  return (
+    <>
+      <div className="personalised-dashboard-parent-header">
+        {pages.map((page, key) => {
+          return (
+            <HeaderLink
+              key={`header-Link-${key}`}
+              title={page?.title}
+              route={page?.route}
+            />
+          );
+        })}
+        <div className="personalised-dashboard-parent-header-right-bar">
+          <div className="personalised-dashboard-parent-header-right-bar-item">
+            PROFILE
+          </div>
+          <div className="personalised-dashboard-parent-header-right-bar-item">
+            ABOUT US
+          </div>
+          <div className="personalised-dashboard-parent-header-right-bar-item">
+            LOG OFF
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 

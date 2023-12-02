@@ -78,8 +78,7 @@ export const submitBatch = (tasks, dispatch) => {
     return _promiseArray;
   }, []);
 
-  Promise.all(promiseArray).then(() => {
-    
+  Promise.all(promiseArray).then(() => {    
     udpateToDoListFromDatabase(dispatch);
   });
 };

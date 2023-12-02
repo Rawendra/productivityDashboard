@@ -1,0 +1,6 @@
+export const pagesKey =[
+  'REMINDERS_ROUTE',
+  'TODOLIST_ROUTE',
+  'HABIT_TRACKER_ROUTES',
+  'CURRENT_PROJECT',
+];

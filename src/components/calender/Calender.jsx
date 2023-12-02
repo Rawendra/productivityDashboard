@@ -22,7 +22,7 @@ const MONTHS = [
 ];
 const getMonthName = (date) => {
   const key = date.getMonth() + 1;
-  console.log("getMonthName", MONTHS[key]);
+  
   return MONTHS[date.getMonth()];
 };
 const currentDate = new Date();
@@ -36,7 +36,6 @@ function Calender() {
 
   const allDatesInCurrentMonth = getArrayOfCurrentMonthDates(currentDate);
   const handleOnClick = (currentDate) => {
-    console.log("currentDate", currentDate);
   };
   useEffect(() => {
     setTimeout(() => {
