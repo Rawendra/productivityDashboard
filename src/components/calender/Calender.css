@@ -6,8 +6,31 @@
 }
 .container-calender-item {
   background-color: aliceblue;
+  cursor: pointer;
+  transition: 0.5s ease-in;
+}
+.container-calender-item-current {
+  cursor: pointer;
+  transition: 0.5s ease-in;
+  background-color: rgb(198, 255, 75);
+}
+.container-calender-item:hover {
+  background-color: dodgerblue;
+  cursor: pointer;
+}
+.container-calender-item-current:hover {
+  cursor: pointer;
+  background-color: dodgerblue;
 }
 .container-calender-item-header {
   background-color: dodgerblue;
   color: lightcyan;
+}
+
+.calendar-month-tab {
+  max-width: 500px;
+  display: flex;
+  padding: 10px;
+  justify-content: space-between
+  
 }

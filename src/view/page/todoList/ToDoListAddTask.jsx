@@ -21,7 +21,7 @@ function ToDoListAddTask() {
   const {
     store: { newTaskMetaData, newTask, todoList},
   } = useStore();
-  console.log("newTaskMetaData", newTaskMetaData);
+  
   const [showAlert, closeAlert] = useState(false);
   //const [newTask, dispatch] = useReducer(reducer, initalState);
   const dispatch = useUpdateStore();
@@ -38,9 +38,9 @@ function ToDoListAddTask() {
   const handleDrawer = (isOpen) => {
     _handleDrawer(isOpen, dispatch);
   };
-  console.log("newTask", newTask);
+  
   const handlePublish=()=>{
-    console.log(todoList);
+    
     const updatedTask=todoList.filter(task=>task.updated)
     submitBatch(updatedTask, dispatch)
   }

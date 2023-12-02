@@ -13,11 +13,7 @@ function Home() {
   const themeContext = useContext(ThemeContext);
   const themeUpdate = useContext(ThemeContextUpdate);
   const store = useStore();
-
-  console.log(store);
-  console.log(themeContext);
   const handleClick = () => {
-    console.log("themeUpdate", themeUpdate.updateAge());
   };
   return (
     <div>

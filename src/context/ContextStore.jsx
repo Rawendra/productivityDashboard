@@ -56,7 +56,7 @@ const UpdateStore = createContext();
 export const ContextStore = ({ children }) => {
   const [store, dispatchUpdate] = useReducer(reducer, initialState);
 
-  console.log("store", store);
+  
   return (
     <Store.Provider value={{ store }}>
       <UpdateStore.Provider value={dispatchUpdate}>

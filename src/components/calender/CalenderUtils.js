@@ -1,23 +1,28 @@
-export function getDaysInCurrentMonth(date) {
-  return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-}
-export const getArrayOfCurrentMonthDates = () => {
-  const date = new Date();
+export const getReminder = (date) => {
+  if (date === new Date()) {
+    return true;
+  }
+  return false;
+};
 
-  const prevDates = [date];
-  console.log("prevDates[0].getDay()", prevDates[0].getDay());
-  while (prevDates[0].getDay() > 1) {
-    const prevDate = new Date();
-    prevDate.setDate(prevDates[0].getDate() - 1);
-    prevDates.unshift(prevDate);
+export const getArrayOfCurrentMonthDates = (currentDate = new Date()) => {
+  //const date = new Date();
+
+  const prevDates = [currentDate];
+  const _currentDateReference=new Date(currentDate.valueOf())
+
+  //prevDateReference.setDate(currentDate.getDate()-1)
+  while (prevDates[0].getDay() > 0) {
+    _currentDateReference.setDate(_currentDateReference.getDate()-1)//_currentDateReference  to 1 day before
+    const prevDateReference = new Date(_currentDateReference.valueOf());//creating prev from _currentDateReference    
+    prevDates.unshift(prevDateReference);//pushing the prevDateReference as first entry
+    
   }
 
   //getting days rest of current week
-  console.log(
-    "prevDates[prevDates.length-1].getDay()",
-    prevDates[prevDates.length - 1].getDay()
-  );
 
+
+  const currentDateIndex = prevDates.length - 1;
   let remainingDaysOfWeek = 7 - prevDates.length;
   let referenceDate = new Date();
   while (remainingDaysOfWeek > 0) {
@@ -37,8 +42,13 @@ export const getArrayOfCurrentMonthDates = () => {
     remainingDaysOfWeek--;
   }
 
-  console.log("printing the days upto monday in ", prevDates);
- 
-  return prevDates ;//[...daysHeaders, ...prevDates];
+  const result = prevDates.map((date, index) => {
+    return {
+      date: date,
+      isCurrentDate: index === currentDateIndex,
+      hasReminder: getReminder(date),
+    };
+  });
+  return result; //[...daysHeaders, ...prevDates];
 };
-export  const daysHeaders = ["MON", "TUES", "WED", "THURS", "FRI", "SAT", "SUN"];
+export const daysHeaders = ["SUN", "MON", "TUES", "WED", "THURS", "FRI", "SAT"];

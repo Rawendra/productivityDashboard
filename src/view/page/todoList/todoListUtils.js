@@ -27,7 +27,7 @@ export const reducer = (state, action) => {
 };
 
 export const submit = (newTask, dispatch) => {
-  console.log("newTask.id", newTask.id);
+  
   if (newTask.id) {
     updateDoc(doc(database, TODOLIST, newTask.id), newTask)
       .then(() => {
@@ -47,7 +47,7 @@ export const udpateToDoListFromDatabase = (dispatch) => {
     const todoList = docs.map((doc) => {
       return { id: doc.id, ...doc.data() };
     });
-    console.log("todoList", todoList);
+    
     dispatch({ type: TYPES.UPDATE_TODO_LIST, todoList });
   });
 };
@@ -79,7 +79,7 @@ export const submitBatch = (tasks, dispatch) => {
   }, []);
 
   Promise.all(promiseArray).then(() => {
-    console.log(promiseArray.length, "promise all");
+    
     udpateToDoListFromDatabase(dispatch);
   });
 };
