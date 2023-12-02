@@ -3,7 +3,7 @@ import { Button } from "@chakra-ui/react";
 import { useState } from "react";
 
 function SideHeader() {
-  const [togglevalue, setToggleValue] = useState(false);
+  const [togglevalue, setToggleValue] = useState(true);
   const expandCollapse = () => {
     setToggleValue(prevState=>!prevState)
   };
