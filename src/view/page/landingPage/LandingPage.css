@@ -1,0 +1,11 @@
+.personal-dashboard-landing-page-container{
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+}
+.personal-dashboard-landing-page-container-buttonbar{
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+
+}

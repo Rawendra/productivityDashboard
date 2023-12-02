@@ -12,7 +12,6 @@ import {
   Alert,
   AlertIcon,
 } from "@chakra-ui/react";
-import { useDisclosure } from "@chakra-ui/react";
 import { initalState, reducer, submit, _handleDrawer , submitBatch} from "./todoListUtils";
 import { useUpdateStore, useStore, TYPES } from "../../../context/ContextStore";
 

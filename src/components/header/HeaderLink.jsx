@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 
-function HeaderLink({ title, route }) {
+function HeaderLink({ title='', route }) {
   const activeClassHandling = ({ isActive, isPending }) => {
     
     return isPending ? "pending" : isActive ? "active" : "pending";
@@ -16,7 +16,7 @@ function HeaderLink({ title, route }) {
   );
 }
 HeaderLink.propTypes = {
-  title: String,
-  route: String,
+  title: String|Object,
+  route: String|Object,
 };
 export default HeaderLink;

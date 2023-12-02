@@ -6,7 +6,8 @@ export const TYPES = {
   UPDATE_NEW_TASK_META: "UPDATE_NEW_TASK_META",
   UPDATE_NEW_TASK: "UPDATE_NEW_TASK",
   RESET_NEWTASK: "RESET_NEWTASK",
-  SET_NEWTASK:'SET_NEWTASK'
+  SET_NEWTASK: "SET_NEWTASK",
+  UPDATE_USER: "UPDATE_USER",
 };
 const _newTask = { itemName: "", priority: 0, etaDate: "" };
 const initialState = {
@@ -17,7 +18,7 @@ const initialState = {
   status: {},
   newTask: _newTask,
   newTaskMetaData: { isOpen: false },
-  user: { name: "Rawendra", auth: "isAuthenticated" },
+  user: { name: "Rawendra", isAuthenticated:false},
   version: 0,
 };
 const reducer = (state, action) => {
@@ -35,7 +36,8 @@ const reducer = (state, action) => {
       return { ...state, newTask: action.newTask };
     case "udpate":
       return { ...state, data: action.data };
-
+    case TYPES.UPDATE_USER:
+      return { ...state, user: { ...action.data } };
     case TYPES.UPDATE_TODO_LIST:
       return {
         ...state,
@@ -56,7 +58,6 @@ const UpdateStore = createContext();
 export const ContextStore = ({ children }) => {
   const [store, dispatchUpdate] = useReducer(reducer, initialState);
 
-  
   return (
     <Store.Provider value={{ store }}>
       <UpdateStore.Provider value={dispatchUpdate}>
