@@ -29,7 +29,7 @@ export const initalState = {
 };
 
 export const handleSubmitSignUp = ({ user, auth, dispatchUser }) => {
-  console.log(user);
+  
   const { email, password } = user;
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {

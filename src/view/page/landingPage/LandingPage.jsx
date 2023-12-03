@@ -32,7 +32,6 @@ function LandingPage() {
   const _handleSignInSubmit = () => {
     handleSignInSubmit({auth,user, dispatch,dispatchUser})
   };
-  console.log("user", user);
   return (
     <div className="personal-dashboard-landing-page-container">
       <Alert status="info">
