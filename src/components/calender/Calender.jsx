@@ -18,11 +18,11 @@ const MONTHS = [
   "MAY",
   "JUNE",
   "JULY",
-  "AUGUST",
-  "SEPTEMBER",
-  "OCTOBER",
-  "NOVEMBER",
-  "DECEMBER",
+  "AUG",
+  "SEPT",
+  "OCT",
+  "NOV",
+  "DEC",
 ];
 const getMonthName = (date) => {
   //const key = date.getMonth() + 1;
@@ -77,7 +77,7 @@ function Calender() {
   };
 
   return (
-    <>
+    <div className="calender-main-div">
       <div className="calendar-month-tab">
         <Button
           size="xs"
@@ -102,7 +102,7 @@ function Calender() {
         </Button>
       </div>
 
-      <div className="container-calender">
+      <div key={'headears-div'} className="container-calender">
         {daysHeaders?.map((currentDay) => {
           return (
             <div
@@ -115,7 +115,7 @@ function Calender() {
         })}
       </div>
       {shouldDisplay ? (
-        <div className="container-calender">
+        <div key={'calnder-data-div'} className="container-calender">
           {allDatesInCurrentMonth?.map((currentDay) => {
             return (
               <div
@@ -136,7 +136,7 @@ function Calender() {
           <Spinner />
         </>
       )}
-    </>
+    </div>
   );
 }
 

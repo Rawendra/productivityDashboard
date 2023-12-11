@@ -34,3 +34,37 @@
   justify-content: space-between
   
 }
+
+
+@media only screen and (max-width: 500px) {
+  .calender-main-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    
+  }
+  .calender-main-div .p{
+    font-size: smaller;
+  }
+  .container-calender{
+    background-color: aquamarine;
+    padding: 0;
+    grid-template-columns: repeat(7, 40px);
+    gap: 0;
+  }
+  .container-calender-item-header{
+    width: 40px;
+     
+    font-size: x-small;
+  }
+  .container-calender-item-current  {
+    width: 40px;
+   
+  }
+  .container-calender-item{
+    width: 40px;
+  }
+
+}
