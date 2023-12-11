@@ -1,8 +1,5 @@
-import { ROUTES, pagesKey, TITLES } from "./constants/routes";
+import { pages} from "./constants/routes";
 
-const pages = pagesKey.map((key) => {
-  return { title: TITLES[key], route: ROUTES[key] };
-});
 
 /// this object is carrying the mappin for pages:{title: , route :}
 // title is showned on the header
@@ -11,3 +8,4 @@ const pages = pagesKey.map((key) => {
 export const appConfig = {
   pages: pages,
 };
+

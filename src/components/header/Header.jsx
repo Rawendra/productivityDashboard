@@ -1,10 +1,10 @@
 import HeaderLink from "./HeaderLink";
-import { appConfig } from "../../AppConfig";
+import { pages } from "../../constants/routes";
 import SideHeader from "./SideHeader";
 import { useStore } from "../../context/ContextStore";
 import "./Header.css";
 function Header() {
-  const { pages } = appConfig;
+ 
   const { store } = useStore();
   const displayAuthLinks = store.user.isAuthenticated;
 

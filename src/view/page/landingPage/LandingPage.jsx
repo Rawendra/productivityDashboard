@@ -1,4 +1,3 @@
-import { useUpdateStore } from "../../../context/ContextStore";
 import {
   FormControl,
   FormLabel,
@@ -11,11 +10,13 @@ import {
 import { auth } from "../../../db/initDb";
 import { useReducer } from "react";
 import { reducer, initalState, handleSubmitSignUp, handleSignInSubmit } from "./LandingPageUtils";
+import {useStore,  useUpdateStore} from '../../../context/ContextStore'
 import "./LandingPage.css";
 
 //'asd1234@gmail.com', password: 'Tiger1290'
 function LandingPage() {
   const dispatch = useUpdateStore();
+  const {store} =useStore();
   const [user, dispatchUser] = useReducer(reducer, initalState);
 
   const _handleSubmitSignUp = () => {

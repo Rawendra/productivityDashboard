@@ -29,12 +29,12 @@ export const initalState = {
 };
 
 export const handleSubmitSignUp = ({ user, auth, dispatchUser }) => {
-  
   const { email, password } = user;
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed up
       const user = userCredential.user;
+
       dispatchUser({
         type: UPDATE_ALERT,
         alertMessage: "USER created successfully, You Sign In NOW",
@@ -62,7 +62,7 @@ export const handleSignInSubmit = ({ auth, user, dispatch, dispatchUser }) => {
       const user = userCredential.user;
       dispatch({
         type: TYPES.UPDATE_USER,
-        data: { isAuthenticated: true, email },
+        data: { isAuthenticated: true, uid: user.uid, email },
       });
       dispatchUser({
         type: UPDATE_ALERT,

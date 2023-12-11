@@ -1,6 +1,5 @@
 import { collectionRefToDoList, database } from "../../../db/initDb";
 import {
-  collection,
   addDoc,
   getDocs,
   deleteDoc,
@@ -47,6 +46,7 @@ export const udpateToDoListFromDatabase = (dispatch) => {
     const todoList = docs.map((doc) => {
       return { id: doc.id, ...doc.data() };
     });
+   
     
     dispatch({ type: TYPES.UPDATE_TODO_LIST, todoList });
   });
