@@ -48,7 +48,6 @@ export const udpateToDoListFromDatabase = (dispatch, uid) => {
       return { id: doc.id, ...doc.data() };
     });
    
-    
     dispatch({ type: TYPES.UPDATE_TODO_LIST, todoList });
     dispatch({type: TYPES.SET_NEWTASK_CLEAR})
   });

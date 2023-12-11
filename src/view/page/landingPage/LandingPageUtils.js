@@ -3,7 +3,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { TYPES } from "../../../context/ContextStore";
-
+import { udpateToDoListFromDatabase } from "../todoList/todoListUtils";
 const UPDATE_ALERT = "UPDATE_ALERT";
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -64,6 +64,7 @@ export const handleSignInSubmit = ({ auth, user, dispatch, dispatchUser }) => {
         type: TYPES.UPDATE_USER,
         data: { isAuthenticated: true, uid: user.uid, email },
       });
+      udpateToDoListFromDatabase(dispatch, user.uid);
       dispatchUser({
         type: UPDATE_ALERT,
         alertStatus: "success",

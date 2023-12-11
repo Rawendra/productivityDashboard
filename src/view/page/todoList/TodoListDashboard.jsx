@@ -1,15 +1,12 @@
-import { useUpdateStore, useStore, TYPES } from "../../../context/ContextStore";
+import { useUpdateStore, useStore } from "../../../context/ContextStore";
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { database } from "../../../db/initDb";
 import TodoListTableDisplay from "./TodoListTableDisplay";
 import ToDoListAddTask from "./ToDoListAddTask";
 import { udpateToDoListFromDatabase } from "./todoListUtils";
 import { Spinner } from "@chakra-ui/react";
 function TodoListDashboard() {
   const dispatch = useUpdateStore();
-  const {store}= useStore()
-  console.log(store);
+  const { store } = useStore();
   //"WqvztaX8vnTcsozFpCkeST0JGcC3"
   //"WqvztaX8vnTcsozFpCkeST0JGcC3"
   //"eyJhbGciOiJSUzI1NiIsImtpZCI6IjNhM2JkODk4ZGE1MGE4OWViOWUxY2YwYjdhN2VmZTM1OTNkNDEwNjgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZmlyLXByb2plY3QtOWYyZGQiLCJhdWQiOiJmaXItcHJvamVjdC05ZjJkZCIsImF1dGhfdGltZSI6MTcwMjMxODg1OCwidXNlcl9pZCI6Ildxdnp0YVg4dm5UY3NvekZwQ2tlU1QwSkdjQzMiLCJzdWIiOiJXcXZ6dGFYOHZuVGNzb3pGcENrZVNUMEpHY0MzIiwiaWF0IjoxNzAyMzE4ODU4LCJleHAiOjE3MDIzMjI0NTgsImVtYWlsIjoiYXNkMTIzNEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiYXNkMTIzNEBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.kJOqfgLx7YLIxf--ZjvCPSuPJUkSaNQpGAoi-RxXGrnVm1ZM-nG20yFvndqb7atAEGeIiHHMdpQC34naJ6EP_50UXIvgPjPAz0-wveBxiRfjtOlljJaOxTp4TOrkuZgc-LNO-2OJrC32y3oYMkcw5wDIDO6aTpXqh8OtCUl315-50YhuLgBdrDLP0fz9DsNVdluf6ZTr8lWEOA28lzsUhs6rGpig3mR6xgl7UMA8yOgdp44N1_a_re7HWIQ0pvJs8qmJESSLMiSztUytGR_Qw8ftUUybQbZG38VTNmjXd13wNiYAKSTaULyuIcNTRrtjDugVDmrXFsD8mxJf2Ceh7Q"
@@ -19,7 +16,6 @@ function TodoListDashboard() {
     //load the data from db and update the store
     udpateToDoListFromDatabase(dispatch, store?.user?.uid);
     setdisplaySpinner(false);
- 
   }, []);
 
   return (

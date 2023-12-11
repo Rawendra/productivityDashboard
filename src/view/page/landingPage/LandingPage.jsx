@@ -10,13 +10,12 @@ import {
 import { auth } from "../../../db/initDb";
 import { useReducer } from "react";
 import { reducer, initalState, handleSubmitSignUp, handleSignInSubmit } from "./LandingPageUtils";
-import {useStore,  useUpdateStore} from '../../../context/ContextStore'
+import {useUpdateStore} from '../../../context/ContextStore'
 import "./LandingPage.css";
 
 //'asd1234@gmail.com', password: 'Tiger1290'
 function LandingPage() {
   const dispatch = useUpdateStore();
-  const {store} =useStore();
   const [user, dispatchUser] = useReducer(reducer, initalState);
 
   const _handleSubmitSignUp = () => {
@@ -47,7 +46,7 @@ function LandingPage() {
           type="email"
           value={user.email}
         />
-        <FormHelperText>We'll never share your email.</FormHelperText>
+        <FormHelperText>{"We'll never share your email."}</FormHelperText>
       </FormControl>
       <FormControl isRequired>
         <FormLabel>Password</FormLabel>
