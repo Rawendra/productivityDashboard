@@ -16,6 +16,7 @@ import {
   ChevronUpIcon,
   ChevronDownIcon,
   InfoOutlineIcon,
+  ExternalLinkIcon,
 } from "@chakra-ui/icons";
 
 import { handleDelete, _handleDrawer } from "./todoListUtils";
@@ -61,6 +62,7 @@ function TodoListTableDisplay() {
               <Tr>
                 <Th>Sr.No.</Th>
                 <Th>ToDo Task</Th>
+                <Th>URL</Th>
                 <Th>Date</Th>
 
                 <Th>Priority</Th>
@@ -74,6 +76,7 @@ function TodoListTableDisplay() {
                   <Tr key={task?.id}>
                     <Td>{index + 1}</Td>
                     <Td>{task?.itemName}</Td>
+                    <Td><a href={task?.url}><ExternalLinkIcon/></a></Td>
                     <Td>{task?.etaDate}</Td>
                     <Td>
                       <>
@@ -119,7 +122,7 @@ function TodoListTableDisplay() {
                     <Td>
                       {" "}
                       <Button
-                        onClick={() => handleDelete(task?.id, dispatch)}
+                        onClick={() => handleDelete(task?.id, dispatch, store?.user?.uid)}
                         colorScheme="orange"
                         variant="outline"
                       >

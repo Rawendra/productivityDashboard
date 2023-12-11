@@ -17,7 +17,7 @@ function TodoListDashboard() {
   const [displaySpinner, setdisplaySpinner] = useState(true);
   useEffect(() => {
     //load the data from db and update the store
-    udpateToDoListFromDatabase(dispatch);
+    udpateToDoListFromDatabase(dispatch, store?.user?.uid);
     setdisplaySpinner(false);
  
   }, []);
