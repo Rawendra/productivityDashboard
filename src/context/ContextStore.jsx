@@ -7,9 +7,10 @@ export const TYPES = {
   UPDATE_NEW_TASK: "UPDATE_NEW_TASK",
   RESET_NEWTASK: "RESET_NEWTASK",
   SET_NEWTASK: "SET_NEWTASK",
+  SET_NEWTASK_CLEAR: "SET_NEWTASK_CLEAR",
   UPDATE_USER: "UPDATE_USER",
 };
-const _newTask = { itemName: "", priority: 0, etaDate: "" };
+const _newTask = { itemName: "", priority: 0, etaDate: "", url: "" };
 const initialState = {
   data: {},
   dbMetaData: {},
@@ -18,7 +19,7 @@ const initialState = {
   status: {},
   newTask: _newTask,
   newTaskMetaData: { isOpen: false },
-  user: { name: "Rawendra", isAuthenticated:false},
+  user: { name: "Rawendra", isAuthenticated: false },
   version: 0,
 };
 const reducer = (state, action) => {
@@ -31,6 +32,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         ...{ newTask: { ...state.newTask, [action.key]: action.value } },
+      };
+    case TYPES.SET_NEWTASK_CLEAR:
+      return {
+        ...state,
+        ...{ newTask: {} },
       };
     case TYPES.SET_NEWTASK:
       return { ...state, newTask: action.newTask };

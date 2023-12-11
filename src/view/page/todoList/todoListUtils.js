@@ -25,36 +25,38 @@ export const reducer = (state, action) => {
   }
 };
 
-export const submit = (newTask, dispatch) => {
+export const submit = (newTask, dispatch, uid) => {
   
   if (newTask.id) {
     updateDoc(doc(database, TODOLIST, newTask.id), newTask)
       .then(() => {
-        udpateToDoListFromDatabase(dispatch);
+        udpateToDoListFromDatabase(dispatch, uid);
       })
       .catch((err) => {
         console.log(err);
       });
   } else {
-    addDoc(collectionRefToDoList, newTask);
-    udpateToDoListFromDatabase(dispatch);
+    addDoc(collectionRefToDoList, {...newTask, uid});
+    udpateToDoListFromDatabase(dispatch, uid);
   }
 };
 
-export const udpateToDoListFromDatabase = (dispatch) => {
+export const udpateToDoListFromDatabase = (dispatch, uid) => {
   getDocs(collectionRefToDoList).then(({ docs }) => {
-    const todoList = docs.map((doc) => {
+
+    const todoList = docs.filter(doc=>doc.data().uid===uid) .map((doc) => {
       return { id: doc.id, ...doc.data() };
     });
    
     
     dispatch({ type: TYPES.UPDATE_TODO_LIST, todoList });
+    dispatch({type: TYPES.SET_NEWTASK_CLEAR})
   });
 };
 
-export const handleDelete = (deleteId, dispatch) => {
+export const handleDelete = (deleteId, dispatch, uid) => {
   deleteDoc(doc(database, TODOLIST, deleteId)).then(() => {
-    udpateToDoListFromDatabase(dispatch);
+    udpateToDoListFromDatabase(dispatch, uid);
   });
 };
 
@@ -65,7 +67,7 @@ export const _handleDrawer = (isOpen, dispatch) => {
   });
 };
 
-export const submitBatch = (tasks, dispatch) => {
+export const submitBatch = (tasks, dispatch, uid) => {
   const promiseArray = tasks.reduce((_promiseArray, currentTask) => {
     const promise = new Promise((res) => {
       updateDoc(doc(database, TODOLIST, currentTask.id), currentTask).then(
@@ -79,6 +81,6 @@ export const submitBatch = (tasks, dispatch) => {
   }, []);
 
   Promise.all(promiseArray).then(() => {    
-    udpateToDoListFromDatabase(dispatch);
+    udpateToDoListFromDatabase(dispatch, uid);
   });
 };

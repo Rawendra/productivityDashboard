@@ -12,15 +12,26 @@ import {
   Alert,
   AlertIcon,
 } from "@chakra-ui/react";
-import { initalState, reducer, submit, _handleDrawer , submitBatch} from "./todoListUtils";
+import {
+  initalState,
+  reducer,
+  submit,
+  _handleDrawer,
+  submitBatch,
+} from "./todoListUtils";
 import { useUpdateStore, useStore, TYPES } from "../../../context/ContextStore";
 
 function ToDoListAddTask() {
   //const { isOpen, onOpen, onClose } = useDisclosure();
   const {
-    store: { newTaskMetaData, newTask, todoList},
+    store: {
+      newTaskMetaData,
+      newTask,
+      todoList,
+      user: { uid },
+    },
   } = useStore();
-  
+
   const [showAlert, closeAlert] = useState(false);
   //const [newTask, dispatch] = useReducer(reducer, initalState);
   const dispatch = useUpdateStore();
@@ -30,19 +41,20 @@ function ToDoListAddTask() {
   };
 
   const handleSubmit = () => {
-    submit(newTask, dispatch);
-    //dispatchToContextStore({ type: TYPES.UPDATE_TODO_LIST });
+    submit(newTask, dispatch, uid);
+    //dispatchToContextStore({ type: TYPES.UPDATE_TODO_LIST });    
     handleDrawer(false);
+ 
+
   };
   const handleDrawer = (isOpen) => {
     _handleDrawer(isOpen, dispatch);
   };
-  
-  const handlePublish=()=>{
-    
-    const updatedTask=todoList.filter(task=>task.updated)
-    submitBatch(updatedTask, dispatch)
-  }
+
+  const handlePublish = () => {
+    const updatedTask = todoList.filter((task) => task.updated);
+    submitBatch(updatedTask, dispatch, uid);
+  };
   return (
     <>
       <Button
@@ -59,7 +71,7 @@ function ToDoListAddTask() {
         variant="outline"
         onClick={() => handlePublish(true)}
       >
-       PUBLISH TASKS
+        PUBLISH TASKS
       </Button>
       <Drawer
         isOpen={newTaskMetaData?.isOpen}
@@ -96,6 +108,13 @@ function ToDoListAddTask() {
               type="number"
               min={1}
               max={100}
+            />
+              URL :
+            <Input
+              value={newTask.url}
+              onChange={(e) => handleUpdate(e, "url")}
+              placeholder=""
+              size="md"            
             />
           </DrawerBody>
 
