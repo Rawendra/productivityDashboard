@@ -1,10 +1,14 @@
 import "./Calender.css";
 
-import { getArrayOfCurrentMonthDates, daysHeaders } from "./CalenderUtils";
+import {
+  getArrayOfCurrentMonthDates,
+  daysHeaders,
+} from "./CalenderUtils";
 import { Button } from "@chakra-ui/react";
 import { BellIcon } from "@chakra-ui/icons";
 import { Spinner, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { useStore, useUpdateStore, TYPES } from "../../context/ContextStore";
 
 const MONTHS = [
   "JAN",
@@ -21,8 +25,8 @@ const MONTHS = [
   "DECEMBER",
 ];
 const getMonthName = (date) => {
-  const key = date.getMonth() + 1;
-  
+  //const key = date.getMonth() + 1;
+
   return MONTHS[date.getMonth()];
 };
 const currentDate = new Date();
@@ -31,11 +35,25 @@ const getClassForDate = (currentDate) => {
     ? "container-calender-item-current"
     : "container-calender-item";
 };
+
 function Calender() {
   const [shouldDisplay, setshouldDisplay] = useState(false);
+  const dispatch = useUpdateStore();
 
-  const allDatesInCurrentMonth = getArrayOfCurrentMonthDates(currentDate);
+  const {
+    store: { todoList },
+  } = useStore();
+  
+  const allDatesInCurrentMonth = getArrayOfCurrentMonthDates(
+    currentDate,
+    todoList
+  );
+
   const handleOnClick = (currentDate) => {
+    dispatch({
+      type: TYPES.UPDATE_SELECTED_REMINDER_DATE,
+      selectedDate: currentDate,
+    });
   };
   useEffect(() => {
     setTimeout(() => {
@@ -101,19 +119,21 @@ function Calender() {
           {allDatesInCurrentMonth?.map((currentDay) => {
             return (
               <div
-                key={currentDay?.toString()}
+                key={`DATA_VALUE${currentDay?.toString()}`}
                 className={getClassForDate(currentDay)}
                 onClick={() => handleOnClick(currentDay)}
               >
+                   {currentDay?.date?.getDate()}
                 {currentDay?.hasReminder && <BellIcon boxSize={3} />}{" "}
-                {currentDay?.date?.getDate()}
+             
               </div>
             );
           })}
         </div>
       ) : (
         <>
-          We're are rendering the calender <Spinner />
+          {"We're are rendering the calender "}
+          <Spinner />
         </>
       )}
     </>

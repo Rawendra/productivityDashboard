@@ -1,4 +1,4 @@
-import { useRef, useReducer, useState } from "react";
+import { useRef, useState } from "react";
 import {
   Drawer,
   DrawerBody,
@@ -13,8 +13,6 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 import {
-  initalState,
-  reducer,
   submit,
   _handleDrawer,
   submitBatch,
@@ -32,7 +30,7 @@ function ToDoListAddTask() {
     },
   } = useStore();
 
-  const [showAlert, closeAlert] = useState(false);
+  const [showAlert] = useState(false);
   //const [newTask, dispatch] = useReducer(reducer, initalState);
   const dispatch = useUpdateStore();
   const btnRef = useRef();
@@ -42,10 +40,8 @@ function ToDoListAddTask() {
 
   const handleSubmit = () => {
     submit(newTask, dispatch, uid);
-    //dispatchToContextStore({ type: TYPES.UPDATE_TODO_LIST });    
+    //dispatchToContextStore({ type: TYPES.UPDATE_TODO_LIST });
     handleDrawer(false);
- 
-
   };
   const handleDrawer = (isOpen) => {
     _handleDrawer(isOpen, dispatch);
@@ -109,12 +105,12 @@ function ToDoListAddTask() {
               min={1}
               max={100}
             />
-              URL :
+            URL :
             <Input
               value={newTask.url}
               onChange={(e) => handleUpdate(e, "url")}
               placeholder=""
-              size="md"            
+              size="md"
             />
           </DrawerBody>
 

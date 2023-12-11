@@ -1,0 +1,6 @@
+.reminder-component-container{
+  background-color: rgb(231, 231, 231);
+  display: flex;
+  flex-wrap: wrap;
+ 
+}

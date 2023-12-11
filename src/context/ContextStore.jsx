@@ -9,6 +9,7 @@ export const TYPES = {
   SET_NEWTASK: "SET_NEWTASK",
   SET_NEWTASK_CLEAR: "SET_NEWTASK_CLEAR",
   UPDATE_USER: "UPDATE_USER",
+  UPDATE_SELECTED_REMINDER_DATE: "UPDATE_SELECTED_REMINDER_DATE",
 };
 const _newTask = { itemName: "", priority: 0, etaDate: "", url: "" };
 const initialState = {
@@ -18,12 +19,15 @@ const initialState = {
   device: {},
   status: {},
   newTask: _newTask,
+  selectedDate: { date: new Date() },
   newTaskMetaData: { isOpen: false },
   user: { name: "Rawendra", isAuthenticated: false },
   version: 0,
 };
 const reducer = (state, action) => {
   switch (action.type) {
+    case TYPES.UPDATE_SELECTED_REMINDER_DATE:
+      return { ...state, selectedDate: action.selectedDate };
     case TYPES.UPDATE_DB_METADATA:
       return { ...state, dbMetaData: action.dbMetaData };
     case TYPES.UPDATE_NEW_TASK_META:
@@ -73,5 +77,8 @@ export const ContextStore = ({ children }) => {
   );
 };
 
+ContextStore.propTypes = {
+  children: {},
+};
 export const useStore = () => useContext(Store);
 export const useUpdateStore = () => useContext(UpdateStore);
