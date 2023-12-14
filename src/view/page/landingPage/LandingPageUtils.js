@@ -5,6 +5,7 @@ import {
 
 import { TYPES } from "../../../context/ContextStoreUtil";
 import { udpateToDoListFromDatabase } from "../todoList/todoListUtils";
+import { udpateProjectsFromDatabase } from "../currentProject/ProjectDashboardUtils";
 const UPDATE_ALERT = "UPDATE_ALERT";
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -66,6 +67,7 @@ export const handleSignInSubmit = ({ auth, user, dispatch, dispatchUser }) => {
         data: { isAuthenticated: true, uid: user.uid, email },
       });
       udpateToDoListFromDatabase(dispatch, user.uid);
+      udpateProjectsFromDatabase(dispatch, user.uid);
       dispatchUser({
         type: UPDATE_ALERT,
         alertStatus: "success",

@@ -8,6 +8,7 @@ export const TYPES = {
   SET_NEWTASK_CLEAR: "SET_NEWTASK_CLEAR",
   UPDATE_USER: "UPDATE_USER",
   UPDATE_SELECTED_REMINDER_DATE: "UPDATE_SELECTED_REMINDER_DATE",
+  SET_PROJECT_LIST: "SET_PROJECT_LIST",
 };
 
 export const _newTask = { itemName: "", priority: 0, etaDate: "", url: "" };
@@ -25,6 +26,8 @@ export const initialState = {
 };
 export const reducer = (state, action) => {
   switch (action.type) {
+    case TYPES.SET_PROJECT_LIST:
+      return { ...state, projectList: action.projectList };
     case TYPES.UPDATE_SELECTED_REMINDER_DATE:
       return { ...state, selectedDate: action.selectedDate };
     case TYPES.UPDATE_DB_METADATA:
