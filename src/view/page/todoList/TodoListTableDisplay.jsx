@@ -1,4 +1,5 @@
-import { useUpdateStore, useStore, TYPES } from "../../../context/ContextStore";
+import { useUpdateStore, useStore } from "../../../context/ContextStore";
+import { TYPES } from "../../../context/ContextStoreUtil";
 import {
   Table,
   Thead,

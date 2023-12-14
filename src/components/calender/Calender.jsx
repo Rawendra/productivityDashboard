@@ -1,14 +1,12 @@
 import "./Calender.css";
 
-import {
-  getArrayOfCurrentMonthDates,
-  daysHeaders,
-} from "./CalenderUtils";
+import { getArrayOfCurrentMonthDates, daysHeaders } from "./CalenderUtils";
 import { Button } from "@chakra-ui/react";
 import { BellIcon } from "@chakra-ui/icons";
 import { Spinner, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useStore, useUpdateStore, TYPES } from "../../context/ContextStore";
+import { useStore, useUpdateStore } from "../../context/ContextStore";
+import { TYPES } from "../../context/ContextStoreUtil";
 
 const MONTHS = [
   "JAN",
@@ -43,7 +41,7 @@ function Calender() {
   const {
     store: { todoList },
   } = useStore();
-  
+
   const allDatesInCurrentMonth = getArrayOfCurrentMonthDates(
     currentDate,
     todoList
@@ -102,7 +100,7 @@ function Calender() {
         </Button>
       </div>
 
-      <div key={'headears-div'} className="container-calender">
+      <div key={"headears-div"} className="container-calender">
         {daysHeaders?.map((currentDay) => {
           return (
             <div
@@ -115,7 +113,7 @@ function Calender() {
         })}
       </div>
       {shouldDisplay ? (
-        <div key={'calnder-data-div'} className="container-calender">
+        <div key={"calnder-data-div"} className="container-calender">
           {allDatesInCurrentMonth?.map((currentDay) => {
             return (
               <div
@@ -123,9 +121,8 @@ function Calender() {
                 className={getClassForDate(currentDay)}
                 onClick={() => handleOnClick(currentDay)}
               >
-                   {currentDay?.date?.getDate()}
+                {currentDay?.date?.getDate()}
                 {currentDay?.hasReminder && <BellIcon boxSize={3} />}{" "}
-             
               </div>
             );
           })}
