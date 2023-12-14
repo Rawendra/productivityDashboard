@@ -7,7 +7,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { TODOLIST } from "../../../db/collections";
-import { TYPES } from "../../../context/ContextStore";
+import { TYPES } from "../../../context/ContextStoreUtil";
 export const initalState = {
   itemName: "",
   priority: 0,
