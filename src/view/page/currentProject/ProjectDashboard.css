@@ -1,3 +1,35 @@
-.project-dashboard-container{
-  background-color: lightskyblue;
+.project-dashboard-container {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100vw;
+}
+
+.project-selected-add-field-button {
+  cursor: pointer;
+}
+.project-selected-add-field-button:hover {
+  cursor: pointer;
+  border: 2px solid rgb(228, 228, 228);
+
+  transition: 0.4s ease-in;
+}
+
+.project-dashboard-list-container {
+  width: 50%;
+}
+
+.project-dashboard-current-project {
+  width: 50%;
+}
+
+@media only screen and (max-width: 700px) {
+  .project-dashboard-list-container {
+    width: 100%;
+  }
+
+  .project-dashboard-current-project {
+    width: 100%;
+  }
 }

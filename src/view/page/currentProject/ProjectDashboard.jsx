@@ -1,19 +1,32 @@
-import React, {useReducer,} from "react";
+import React, { useReducer } from "react";
 import CurrentProject from "./CurrentProject";
 import ProjectListDisplay from "./ProjectListDisplay";
-import {reducer, initalState} from './ProjectDashboardUtils'
-import './ProjectDashboard.css'
+import { reducer, initalState ,PROJECT_REDUCER_TYPES} from "./ProjectDashboardUtils";
+import ProjectSelected from "./ProjectSelected";
+import { Button, ButtonGroup } from "@chakra-ui/react";
+
+import "./ProjectDashboard.css";
 function ProjectDashboard() {
-  const [projectStore, updateProjectStore]=useReducer(reducer, initalState)
+  const [projectStore, updateProjectStore] = useReducer(reducer, initalState);
 
   return (
     <div className="project-dashboard-container">
-      ProjectDashboard
-      <div className="project-dashboard-list">
-        <ProjectListDisplay projectList={projectStore?.projectList} />
+      <div className="project-dashboard-list-container">
+     
+        <div className="project-dashboard-list">
+          <ProjectListDisplay projectList={projectStore?.projectList} />
+        </div>
+        <Button colorScheme="teal" variant="outline">
+          Add Project
+        </Button>
       </div>
-      <div className="project-dashboard-current-project">
+
+      {/* <div className="project-dashboard-current-project">
         <CurrentProject />
+      </div> */}
+
+      <div className="project-dashboard-current-project">
+        <ProjectSelected />
       </div>
     </div>
   );
