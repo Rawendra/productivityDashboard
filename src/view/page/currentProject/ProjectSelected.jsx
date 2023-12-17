@@ -9,44 +9,59 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 
-import { useEffect, useReducer, useState } from "react";
-import {
-  reducer,
-  PROJECT_REDUCER_TYPES,
-  submitProject,
-} from "./ProjectDashboardUtils";
+import { useState } from "react";
+import { PROJECT_REDUCER_TYPES, submitProject } from "./ProjectDashboardUtils";
 
 import ButtonBar from "./buttonBar/ButtonBar";
 import StatusDropdown from "./statusDropdown/StatusDropdown";
 import ProjectDetail from "./selectedProjectDetail/ProjectDetail";
+import {
+  useProjectStore,
+  useUpdateProjectStore,
+} from "../../../context/ProjectContextStore";
+import { useUpdateStore, useStore } from "../../../context/ContextStore";
 
-const initialState = {
-  projectTitle: "projectTitle",
-  trackingDetails: [],
-};
-
-function ProjectSelected({ uid, projectList = [] ,showSelectedProject}) {
+function ProjectSelected({ uid }) {
   const [toggleEdit, settoggleEdit] = useState(false);
-  const [selectedProject, dispatchUpdateSelectedProject] = useReducer(
-    reducer,
-    initialState
-  );
+  const dispatchProject = useUpdateProjectStore();
+  const { store } = useStore();
+  const dispatch = useUpdateStore();
 
-  useEffect(()=>{
+  const {
+    store: { selectedProject },
+  } = useProjectStore();
 
-  },[showSelectedProject])
-  const handleEditTitle = () => {
+  const handleEditSelectedProject = () => {
     settoggleEdit((prevState) => !prevState);
   };
   const handleChange = (e, key) => {
-    dispatchUpdateSelectedProject({
+    dispatchProject({
       type: PROJECT_REDUCER_TYPES.SET_PROJECT_DETAILS,
       data: { [key]: e.target.value },
     });
   };
 
-  const handleAddProject = () => {
-    submitProject(selectedProject, "", uid, [...projectList, selectedProject]);
+  const handleCRUD = (operation) => {
+    submitProject({
+      newProject: selectedProject,
+      dispatch,
+      uid,
+      operation,
+      projectList: store?.projectList,
+    });
+  };
+
+  const handleCancelSelectedProject = () => {
+    handleEditSelectedProject();
+    dispatchProject({
+      type: PROJECT_REDUCER_TYPES.CLEAR_SELECTED_PROJECT,
+    });
+  };
+
+  const handleClearSelectedProject = () => {
+    dispatchProject({
+      type: PROJECT_REDUCER_TYPES.CLEAR_SELECTED_PROJECT,
+    });
   };
 
   const projectDetailsMap = {
@@ -55,8 +70,13 @@ function ProjectSelected({ uid, projectList = [] ,showSelectedProject}) {
     url: Input,
   };
   const projectKeys = Object.keys(projectDetailsMap);
-  const handlers = { handleAddProject, handleEditTitle };
-
+  const handlers = {
+    handleCRUD,
+    handleEditSelectedProject,
+    handleCancelSelectedProject,
+    handleClearSelectedProject,
+  };
+  console.log("selectedProject", selectedProject);
   return (
     <div>
       <Heading as="h4" size="md">
@@ -105,6 +125,6 @@ function ProjectSelected({ uid, projectList = [] ,showSelectedProject}) {
 ProjectSelected.propTypes = {
   uid: String,
   projectList: Array,
-  showSelectedProject:{}
+  showSelectedProject: {},
 };
 export default ProjectSelected;

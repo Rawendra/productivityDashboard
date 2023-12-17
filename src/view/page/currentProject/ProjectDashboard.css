@@ -28,7 +28,19 @@
   justify-content: center;
   gap: 5px;
 }
-
+.table-display-product-list-row {
+  cursor: pointer;
+}
+.table-display-product-list-row:hover {
+  cursor: pointer;
+  background-color: rgb(9, 58, 106);
+  color: white;
+}
+.table-display-product-list-row-active {
+  cursor: pointer;
+  background-color: rgb(9, 58, 106);
+  color: white;
+}
 @media only screen and (max-width: 700px) {
   .project-dashboard-list-container {
     width: 100%;

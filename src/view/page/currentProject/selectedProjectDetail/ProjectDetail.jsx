@@ -17,6 +17,8 @@ function ProjectDetail({
         {toggleEdit ? (
           <Component
             handleChange={handleChange}
+            value ={selectedProject[projectDetailKey]}
+            onChange={(e) => handleChange(e, projectDetailKey)}
             selectedProject={selectedProject}
           />
         ) : (

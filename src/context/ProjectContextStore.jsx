@@ -4,7 +4,7 @@ import { initialState, reducer } from "../view/page/currentProject/ProjectDashbo
 const ProjectStore = createContext();
 const UpdateProjectStore = createContext();
 
-export const ContextStore = ({ children }) => {
+export const ProjectContextStore = ({ children }) => {
   const [store, dispatchUpdate] = useReducer(reducer, initialState);
 
   return (
@@ -16,7 +16,7 @@ export const ContextStore = ({ children }) => {
   );
 };
 
-ContextStore.propTypes = {
+ProjectContextStore.propTypes = {
   children: {},
 };
 export const useProjectStore = () => useContext(ProjectStore);

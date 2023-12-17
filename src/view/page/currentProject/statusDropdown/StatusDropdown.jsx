@@ -12,9 +12,9 @@ function StatusDropdown({ handleChange, selectedProject }) {
         handleChange(e, "status");
       }}
     >
-      <option value="todo">To-do</option>
-      <option value="inprogress">In-progress</option>
-      <option value="done">Done</option>
+      <option value="To-do">To-do</option>
+      <option value="In-progress">In-progress</option>
+      <option value="Done">Done</option>
     </Select>
   );
 }

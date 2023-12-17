@@ -1,12 +1,35 @@
 import { Button } from "@chakra-ui/react";
+import { useState } from "react";
 
 function ButtonBar(props) {
+  const [showAdd, setShowAdd] = useState(false);
   const {
     toggleEdit = false,
     selectedProject,
-    handlers: { handleEditTitle, handleAddProject },
+    handlers: {
+      handleEditSelectedProject,
+      handleCancelSelectedProject,
+      handleClearSelectedProject,
+      handleCRUD,
+    },
   } = props;
 
+  const handleOnClickClearButton = () => {
+    handleClearSelectedProject();
+  };
+  const handleSave = () => {
+    setShowAdd(true);
+    handleEditSelectedProject();
+  };
+  const handleOnclickAdd = () => {
+    setShowAdd(false);
+    handleOnClickClearButton()
+    handleCRUD("ADD_OR_UPDATE");
+  };
+  const handleDeleteClick =()=>{
+    handleCRUD("DELETE")
+    handleOnClickClearButton()
+  }
   return (
     <div>
       {" "}
@@ -17,26 +40,44 @@ function ButtonBar(props) {
             <Button
               colorScheme="blue"
               isDisabled={selectedProject?.status === ""}
-              onClick={handleEditTitle}
+              onClick={handleSave}
             >
               SAVE
+            </Button>
+            <Button colorScheme="orange" onClick={handleCancelSelectedProject}>
+              CANCEL
+            </Button>
+            <Button colorScheme="yellow" onClick={handleOnClickClearButton}>
+              CLEAR
             </Button>
           </div>
         </>
       ) : (
         <div className="project-selected-button-bar">
-          <Button colorScheme="blue" onClick={handleEditTitle}>
+          <Button colorScheme="blue" onClick={handleEditSelectedProject}>
             {" "}
-            EDIT
+            {selectedProject.id ? 'EDIT': 'CREATE'}
           </Button>
-          <Button colorScheme="green" onClick={handleAddProject}>
-            {" "}
-            ADD{" "}
-          </Button>
-          <Button colorScheme="red" onClick={handleEditTitle}>
+          {showAdd && (
+            <Button
+              colorScheme="green"
+              onClick={() => {
+                handleOnclickAdd();
+              }}
+            >
+              {" "}
+              {!selectedProject.id ? "ADD" : "UPDATE"}
+            </Button>
+          )}
+          <Button colorScheme="red" isDisabled={!selectedProject.id} onClick={() => handleDeleteClick() }>
             {" "}
             DELETE
           </Button>
+          {selectedProject.id && (
+            <Button colorScheme="yellow" onClick={handleOnClickClearButton}>
+              CLEAR
+            </Button>
+          )}
         </div>
       )}
     </div>
