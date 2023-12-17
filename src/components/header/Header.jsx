@@ -1,6 +1,6 @@
 import HeaderLink from "./HeaderLink";
 import { pages } from "../../constants/routes";
-import SideHeader from "./SideHeader";
+// import SideHeader from "./SideHeader";
 import { useStore } from "../../context/ContextStore";
 import "./Header.css";
 function Header() {
@@ -27,7 +27,7 @@ function Header() {
           />
         )}
 
-        <SideHeader />
+        {/* <SideHeader /> */}
       </div>
     </>
   );

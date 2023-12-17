@@ -1,12 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-
-import HabitTracker from "../view/page/habitTracker/HabitTracker";
-import TodoListDashboard from "../view/page/todoList/TodoListDashboard";
-import ReminderComponent from "../view/page/reminders/ReminderComponent";
 import LandingPage from "../view/page/landingPage/LandingPage";
-import CurrentProject from "../view/page/currentProject/CurrentProject";
-import { ROUTES, pages } from "../constants/routes";
+import { pages } from "../constants/routes";
 import { useStore } from "../context/ContextStore";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function RoutesCustom() {
   const {
@@ -14,6 +11,15 @@ function RoutesCustom() {
       user: { isAuthenticated },
     },
   } = useStore();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const shouldRedirect = location.pathname !== "/" && !isAuthenticated;
+    if (shouldRedirect) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <>
@@ -26,8 +32,8 @@ function RoutesCustom() {
             <Route key={route} path={route} element={<Component />} />;
           }
         })}
-    
-         <Route path="/" element={<LandingPage />} />
+
+        <Route path="/" element={<LandingPage />} />
       </Routes>
     </>
   );
