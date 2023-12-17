@@ -19,7 +19,7 @@ function TableDisplayProjectList(props) {
   const { displayList, headerList, onHandleRowClick } = props || {
     displayList: [],
   };
-  console.log("displayList", displayList);
+  
   const handleClick = (project) => {
     onHandleRowClick(project);
   };
@@ -45,7 +45,8 @@ function TableDisplayProjectList(props) {
         colorScheme = "gray";
         break;
     }
-    console.log("colorScheme", status,colorScheme);
+   
+    
     return colorScheme;
   };
   return (

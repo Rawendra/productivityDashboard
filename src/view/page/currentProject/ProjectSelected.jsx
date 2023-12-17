@@ -76,7 +76,6 @@ function ProjectSelected({ uid }) {
     handleCancelSelectedProject,
     handleClearSelectedProject,
   };
-  console.log("selectedProject", selectedProject);
   return (
     <div>
       <Heading as="h4" size="md">

@@ -6,7 +6,8 @@ import "./ProjectDashboard.css";
 
 function ProjectDashboard() {
   const { store } = useStore();
-  console.log('store',store)
+
+  
 
   return (
     <div className="project-dashboard-container">

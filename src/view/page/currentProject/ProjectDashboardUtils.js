@@ -57,10 +57,12 @@ export const udpateProjectsFromDatabase = (dispatch, uid) => {
       })
       .map((doc) => {
         const data = doc.data();
-        console.log("data.uid", data.uid);
+    
+        
         return {  ...data.project ,id: doc.id};
       });
-    console.log("result", result);
+
+      
 
     dispatch({ type: TYPES.SET_PROJECT_LIST, projectList: result });
   });
@@ -83,7 +85,7 @@ export const submitProject = ({
       return _project.id === newProject.id;
     });
     if (isUpdateOperation) {
-      console.log("the operation is update");
+      
       updateDoc(doc(database, PROJECT_LIST, newProject.id), {project: newProject})
         .then(() => {
           udpateProjectsFromDatabase(dispatch, uid);
@@ -95,8 +97,8 @@ export const submitProject = ({
       // fresh push operation===ADD
 
       addDoc(collectionRefProjectList, { uid: uid, project: newProject })
-        .then((response) => {
-          console.log(response);
+        .then(() => {
+    
           udpateProjectsFromDatabase(dispatch, uid);
         })
         .catch((err) => {
