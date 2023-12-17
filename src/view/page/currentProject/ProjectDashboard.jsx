@@ -1,32 +1,36 @@
-import React, { useReducer } from "react";
-import CurrentProject from "./CurrentProject";
-import ProjectListDisplay from "./ProjectListDisplay";
-import { reducer, initalState ,PROJECT_REDUCER_TYPES} from "./ProjectDashboardUtils";
+import ProjectListDisplay from "./projectListDisplay/ProjectListDisplay";
+import { useReducer } from "react";
+import { reducer, initalState ,PROJECT_REDUCER_TYPES} from './ProjectDashboardUtils'
 import ProjectSelected from "./ProjectSelected";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { useStore } from "../../../context/ContextStore";
 
 import "./ProjectDashboard.css";
-function ProjectDashboard() {
-  const [projectStore, updateProjectStore] = useReducer(reducer, initalState);
 
+function ProjectDashboard() {
+  const [selectedProject, dispatchUpdateSelectedProject] = useReducer(
+    reducer,
+    initalState
+  );
+  const { store } = useStore();
+
+  const onHandleRowClick=(project)=>{
+    dispatchUpdateSelectedProject({type:PROJECT_REDUCER_TYPES.SET_SELECTED_PROJECT,
+      selectedProject: project })
+  }
   return (
     <div className="project-dashboard-container">
       <div className="project-dashboard-list-container">
-     
         <div className="project-dashboard-list">
-          <ProjectListDisplay projectList={projectStore?.projectList} />
+          <ProjectListDisplay projectList={store?.projectList} onHandleRowClick={onHandleRowClick} />
         </div>
-        <Button colorScheme="teal" variant="outline">
-          Add Project
-        </Button>
       </div>
 
-      {/* <div className="project-dashboard-current-project">
-        <CurrentProject />
-      </div> */}
-
       <div className="project-dashboard-current-project">
-        <ProjectSelected />
+        <ProjectSelected
+          uid={store?.user?.uid}
+          showSelectedProject={selectedProject}
+          projectList={store?.projectList}
+        />
       </div>
     </div>
   );

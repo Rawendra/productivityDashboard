@@ -9,8 +9,9 @@ import {
 } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 
-function TableDisplay(props) {
-  const { displayList, headerList } = props || { displayList: [] };
+function TableDisplayProjectList(props) {
+  const { displayList, headerList, onHandleRowClick } = props || { displayList: [] };
+  console.log('displayList',displayList)
   return (
     <div>
       {" "}
@@ -25,17 +26,18 @@ function TableDisplay(props) {
             </Tr>
           </Thead>
           <Tbody>
-            {displayList?.map((task, index) => {
+            {displayList?.map((project, index) => {
               return (
-                <Tr key={task?.id}>
+                <Tr onClick={()=>onHandleRowClick(project)} key={project?.id}>
                   <Td>{index + 1}</Td>
-                  <Td>{task?.itemName}</Td>
+                  <Td>{project?.projectTitle}</Td>
+                  <Td>{project?.status}</Td>
                   <Td>
-                    <a href={task?.url}>
+                    <a href={project?.url}>
                       <ExternalLinkIcon />
                     </a>
                   </Td>
-                  <Td>{task?.etaDate}</Td>
+          
                 </Tr>
               );
             })}
@@ -46,4 +48,4 @@ function TableDisplay(props) {
   );
 }
 
-export default TableDisplay;
+export default TableDisplayProjectList;

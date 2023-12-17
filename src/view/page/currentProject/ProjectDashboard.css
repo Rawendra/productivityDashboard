@@ -23,6 +23,11 @@
 .project-dashboard-current-project {
   width: 50%;
 }
+.project-selected-button-bar {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
 
 @media only screen and (max-width: 700px) {
   .project-dashboard-list-container {
