@@ -9,14 +9,14 @@ import {
 } from "@chakra-ui/react";
 import { auth } from "../../../db/initDb";
 import { useReducer } from "react";
-import { reducer, initalState, handleSubmitSignUp, handleSignInSubmit } from "./LandingPageUtils";
+import { reducer, initialState, handleSubmitSignUp, handleSignInSubmit } from "./LandingPageUtils";
 import {useUpdateStore} from '../../../context/ContextStore'
 import "./LandingPage.css";
 
 //'asd1234@gmail.com', password: 'Tiger1290'
 function LandingPage() {
   const dispatch = useUpdateStore();
-  const [user, dispatchUser] = useReducer(reducer, initalState);
+  const [user, dispatchUser] = useReducer(reducer, initialState);
 
   const _handleSubmitSignUp = () => {
     handleSubmitSignUp({

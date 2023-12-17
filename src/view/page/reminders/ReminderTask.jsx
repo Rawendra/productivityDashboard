@@ -16,7 +16,10 @@ function ReminderTask() {
   }, [selectedDate, todoList]);
   return (
     <div>
-      <TableDisplay displayList={todoListDisplay} />
+      <TableDisplay
+        headerList={["Sr.No.", "ToDo Task", "URL", "Date"]}
+        displayList={todoListDisplay}
+      />
     </div>
   );
 }

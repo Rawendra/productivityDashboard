@@ -18,6 +18,7 @@ export const initialState = {
   todoList: [],
   device: {},
   status: {},
+  projectList:[],
   newTask: _newTask,
   selectedDate: { date: new Date() },
   newTaskMetaData: { isOpen: false },
@@ -26,6 +27,7 @@ export const initialState = {
 };
 export const reducer = (state, action) => {
   switch (action.type) {
+   
     case TYPES.SET_PROJECT_LIST:
       return { ...state, projectList: action.projectList };
     case TYPES.UPDATE_SELECTED_REMINDER_DATE:

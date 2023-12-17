@@ -1,19 +1,27 @@
-import React, {useReducer,} from "react";
-import CurrentProject from "./CurrentProject";
-import ProjectListDisplay from "./ProjectListDisplay";
-import {reducer, initalState} from './ProjectDashboardUtils'
-import './ProjectDashboard.css'
+import ProjectListDisplay from "./projectListDisplay/ProjectListDisplay";
+import ProjectSelected from "./ProjectSelected";
+import { useStore } from "../../../context/ContextStore";
+
+import "./ProjectDashboard.css";
+
 function ProjectDashboard() {
-  const [projectStore, updateProjectStore]=useReducer(reducer, initalState)
+  const { store } = useStore();
+
+  
 
   return (
     <div className="project-dashboard-container">
-      ProjectDashboard
-      <div className="project-dashboard-list">
-        <ProjectListDisplay projectList={projectStore?.projectList} />
+      <div className="project-dashboard-list-container">
+        <div className="project-dashboard-list">
+          <ProjectListDisplay projectList={store?.projectList} />
+        </div>
       </div>
+
       <div className="project-dashboard-current-project">
-        <CurrentProject />
+        <ProjectSelected
+          uid={store?.user?.uid}
+          projectList={store?.projectList}
+        />
       </div>
     </div>
   );

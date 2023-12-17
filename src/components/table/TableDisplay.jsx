@@ -10,7 +10,7 @@ import {
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 function TableDisplay(props) {
-  const { displayList } = props || { displayList: [] };
+  const { displayList, headerList } = props || { displayList: [] };
   return (
     <div>
       {" "}
@@ -18,10 +18,10 @@ function TableDisplay(props) {
         <Table variant="simple">
           <Thead>
             <Tr>
-              <Th>Sr.No.</Th>
-              <Th>ToDo Task</Th>
-              <Th>URL</Th>
-              <Th>Date</Th>
+              {headerList?.map((header) => {
+                return <Th key={header}>{header}</Th>;
+              })}
+            
             </Tr>
           </Thead>
           <Tbody>
