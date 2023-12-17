@@ -1,5 +1,5 @@
 import { createContext, useReducer, useContext } from "react";
-import { initialState, reducer } from "./ProjectContextStoreUtil";
+import { initialState, reducer } from "../view/page/currentProject/ProjectDashboardUtils";
 
 const ProjectStore = createContext();
 const UpdateProjectStore = createContext();
@@ -19,5 +19,5 @@ export const ContextStore = ({ children }) => {
 ContextStore.propTypes = {
   children: {},
 };
-export const useStore = () => useContext(Store);
-export const useUpdateStore = () => useContext(UpdateStore);
+export const useProjectStore = () => useContext(ProjectStore);
+export const useUpdateProjectStore = () => useContext(UpdateProjectStore);

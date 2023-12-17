@@ -1,6 +1,6 @@
 import ProjectListDisplay from "./projectListDisplay/ProjectListDisplay";
 import { useReducer } from "react";
-import { reducer, initalState ,PROJECT_REDUCER_TYPES} from './ProjectDashboardUtils'
+import { reducer, initialState ,PROJECT_REDUCER_TYPES} from './ProjectDashboardUtils'
 import ProjectSelected from "./ProjectSelected";
 import { useStore } from "../../../context/ContextStore";
 
@@ -9,7 +9,7 @@ import "./ProjectDashboard.css";
 function ProjectDashboard() {
   const [selectedProject, dispatchUpdateSelectedProject] = useReducer(
     reducer,
-    initalState
+    initialState
   );
   const { store } = useStore();
 

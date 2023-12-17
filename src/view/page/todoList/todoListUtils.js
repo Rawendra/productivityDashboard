@@ -8,7 +8,7 @@ import {
 } from "firebase/firestore";
 import { TODOLIST } from "../../../db/collections";
 import { TYPES } from "../../../context/ContextStoreUtil";
-export const initalState = {
+export const initialState = {
   itemName: "",
   priority: 0,
   etaDate: "",
@@ -19,7 +19,7 @@ export const reducer = (state, action) => {
     case "UPDATE_STATE":
       return { ...state, [action.key]: action.value };
     case "RESET":
-      return initalState;
+      return initialState;
     default:
       return state;
   }

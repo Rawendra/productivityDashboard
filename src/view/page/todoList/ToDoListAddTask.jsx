@@ -31,7 +31,7 @@ function ToDoListAddTask() {
   } = useStore();
 
   const [showAlert] = useState(false);
-  //const [newTask, dispatch] = useReducer(reducer, initalState);
+  //const [newTask, dispatch] = useReducer(reducer, initialState);
   const dispatch = useUpdateStore();
   const btnRef = useRef();
   const handleUpdate = (e, key) => {

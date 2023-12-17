@@ -22,7 +22,7 @@ export const reducer = (state, action) => {
   }
 };
 
-export const initalState = {
+export const initialState = {
   selectedProject: {},
   projectList: [
     {
