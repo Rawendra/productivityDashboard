@@ -18,6 +18,7 @@ import {
   ChevronDownIcon,
   InfoOutlineIcon,
   ExternalLinkIcon,
+  ArrowForwardIcon,
 } from "@chakra-ui/icons";
 
 import { handleDelete, _handleDrawer } from "./todoListUtils";
@@ -26,7 +27,7 @@ function TodoListTableDisplay() {
 
   const dispatch = useUpdateStore();
   const {
-    store: { todoList },
+    store: { todoList, user },
   } = store;
 
   const displayList = todoList.sort((e1, e2) => e1.priority - e2.priority);
@@ -54,6 +55,7 @@ function TodoListTableDisplay() {
     _handleDrawer(true, dispatch);
     dispatch({ type: TYPES.SET_NEWTASK, newTask: task });
   };
+  
   return (
     <>
       {!!displayList?.length && (
@@ -64,6 +66,7 @@ function TodoListTableDisplay() {
                 <Th>Sr.No.</Th>
                 <Th>ToDo Task</Th>
                 <Th>URL</Th>
+                <Th>PLAY</Th>
                 <Th>Date</Th>
 
                 <Th>Priority</Th>
@@ -77,7 +80,14 @@ function TodoListTableDisplay() {
                   <Tr key={task?.id}>
                     <Td>{index + 1}</Td>
                     <Td>{task?.itemName}</Td>
-                    <Td><a href={task?.url}><ExternalLinkIcon/></a></Td>
+                    <Td>
+                      <a href={task?.url}>
+                        <ExternalLinkIcon />
+                      </a>
+                    </Td>
+                    <Td>
+                      <ArrowForwardIcon />
+                    </Td>
                     <Td>{task?.etaDate}</Td>
                     <Td>
                       <>
@@ -123,7 +133,9 @@ function TodoListTableDisplay() {
                     <Td>
                       {" "}
                       <Button
-                        onClick={() => handleDelete(task?.id, dispatch, store?.user?.uid)}
+                        onClick={() =>
+                          handleDelete(task?.id, dispatch, user?.uid)
+                        }
                         colorScheme="orange"
                         variant="outline"
                       >

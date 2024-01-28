@@ -9,8 +9,13 @@ import {
 } from "@chakra-ui/react";
 import { auth } from "../../../db/initDb";
 import { useReducer } from "react";
-import { reducer, initialState, handleSubmitSignUp, handleSignInSubmit } from "./LandingPageUtils";
-import {useUpdateStore} from '../../../context/ContextStore'
+import {
+  reducer,
+  initialState,
+  handleSubmitSignUp,
+  handleSignInSubmit,
+} from "./LandingPageUtils";
+import { useUpdateStore } from "../../../context/ContextStore";
 import "./LandingPage.css";
 
 //'asd1234@gmail.com', password: 'Tiger1290'
@@ -30,7 +35,7 @@ function LandingPage() {
   };
 
   const _handleSignInSubmit = () => {
-    handleSignInSubmit({auth,user, dispatch,dispatchUser})
+    handleSignInSubmit({ auth, user, dispatch, dispatchUser });
   };
   return (
     <div className="personal-dashboard-landing-page-container">
@@ -70,6 +75,7 @@ function LandingPage() {
           {user?.alertMessage}
         </Alert>
       )}
+ 
       <div className="personal-dashboard-landing-page-container-buttonbar">
         <Button colorScheme="blue" onClick={_handleSubmitSignUp}>
           SIGN UP
